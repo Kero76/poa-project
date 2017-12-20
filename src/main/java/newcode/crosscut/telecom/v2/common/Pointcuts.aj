@@ -24,4 +24,19 @@ public aspect Pointcuts {
 		set(@UniqueId private !final String+ newcode..*.name)
 		|| set(@UniqueId private final !String+ newcode..*.name)
 	;
+		
+	/**
+	 * Pointcut catch the constructor of a Customer.
+	 * 
+	 * @param name
+	 * 	Name of the future customer.
+	 * @param ac
+	 * 	Code area of the future customer.
+	 * @see newcode.domain.telecom.v2.connect.Customer
+	 * @see newcode.crosscut.telecom.v2.unicity.EnforceUniticy
+	 */
+	public pointcut constructorCustomerCall(String name, int ac) :
+		call(newcode.domain.telecom.v2.connect.Customer.new(String, int)) 
+		&& args(name, ac)
+	;
 }
