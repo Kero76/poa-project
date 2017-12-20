@@ -47,93 +47,93 @@ public aspect Pointcuts {
 	// TRACE
 	/**
 	 * 
-	 * @param jp
-	 * 	JoinPoint instance to get information on trace.
+	 * @param o
+	 * 	Object who call methods catch by pointcut.
 	 * @see newcode.domain.telecom.v2.connect.ICustomer
 	 */
-	public pointcut customerCallTrace(JoinPoint jp) :
+	public pointcut customerCallTrace(Object o) :
 		call(* newcode.domain.telecom.v2.connect.ICustomer+.*(..))
-		&& target(jp);
+		&& target(o);
 	;
 	
 	/**
 	 * 
-	 * @param jp
-	 * 	JoinPoint instance to get information on trace.
+	 * @param o
+	 * 	Object who call methods catch by pointcut.
 	 * @see newcode.domain.telecom.v2.connect.ICustomer.hangUp()
 	 */
-	public pointcut customerHangupCallTrace(JoinPoint jp) :
+	public pointcut customerHangupCallTrace(Object o) :
 		call(* newcode.domain.telecom.v2.connect.ICustomer+.hangUp(..))
-		&& target(jp)
+		&& target(o)
 	;
 	
 	/**
 	 * 
-	 * @param jp
-	 * 	JoinPoint instance to get information on trace.
+	 * @param o
+	 * 	Object who call methods catch by pointcut.
 	 * @see newcode.domain.telecom.v2.connect.ICustomer.hangUp()
 	 */
-	public pointcut customerPickupCallTrace(JoinPoint jp) :
+	public pointcut customerPickupCallTrace(Object o) :
 		call(* newcode.domain.telecom.v2.connect.ICustomer+.pickUp(..))
-		&& target(jp)
+		&& target(o)
 	;
 	
 	/**
 	 * 
-	 * @param jp
-	 * 	JoinPoint instance to get information on trace.
+	 * @param o
+	 * 	Object who call methods catch by pointcut.
 	 * @see newcode.crosscut.telecom.v2.common.Config.customerCallTrace(jp)
 	 * @see newcode.crosscut.telecom.v2.common.Config.customerHangupCallTrace(jp)
 	 * @see newcode.crosscut.telecom.v2.common.Config.customerPickupCallTrace(jp)
 	 */
-	public pointcut customerFinalCallTrace(JoinPoint jp) :
-		customerCallTrace(jp)
-		|| customerHangupCallTrace(jp)
-		|| customerPickupCallTrace(jp)
+	public pointcut customerFinalCallTrace(Object o) :
+		customerCallTrace(o)
+		|| customerHangupCallTrace(o)
+		|| customerPickupCallTrace(o)
 	;
 	
 	/**
 	 * 
-	 * @param jp
-	 * 	JoinPoint instance to get information on trace.
+	 * @param o
+	 * 	Object who call methods catch by pointcut.
 	 * @see newcode.domain.telecom.v2.connect.ICall+.invite()
 	 */
-	public pointcut callInviteCallTrace(JoinPoint jp) :
+	public pointcut callInviteCallTrace(Object o) :
 		call(* newcode.domain.telecom.v2.connect.ICall+.invite(..))
-		&& target(jp)
+		&& target(o)
 	;
 	
 	/**
 	 * 
-	 * @param jp
-	 * 	JoinPoint instance to get information on trace.
+	 * @param o
+	 * 	Object who call methods catch by pointcut.
 	 * @see newcode.domain.telecom.v2.connect.ICall+.hangUp()
 	 */
-	public pointcut callHangupCallTrace(JoinPoint jp) :
+	public pointcut callHangupCallTrace(Object o) :
 		call(* newcode.domain.telecom.v2.connect.ICall+.hangUp(..))
-		&& target(jp)
+		&& target(o)
 	;
 
 	/**
 	 * 
-	 * @param jp
-	 * 	JoinPoint instance to get information on trace.
+	 * @param o
+	 * 	Object who call methods catch by pointcut.
 	 * @see newcode.domain.telecom.v2.connect.ICall+.pickUp()
 	 */
-	public pointcut callPickupCallTrace(JoinPoint jp) :
+	public pointcut callPickupCallTrace(Object o) :
 		call(* newcode.domain.telecom.v2.connect.ICall+.pickUp(..))
-		&& target(jp)
+		&& target(o)
 	;
 	
 	/**
 	 * 
-	 * @param jp
-	 * 	JoinPoint instance to get information on trace.
+	 * @param o
+	 * 	Object who call methods catch by pointcut.
 	 * @see newcode.crosscut.telecom.v2.common.Config.callHangupCallTrace(jp)
 	 * @see newcode.crosscut.telecom.v2.common.Config.callPickupCallTrace(jp)
 	 */
-	public pointcut callFinalCallTrace(JoinPoint jp) :
-		callHangupCallTrace(jp)
-		|| callPickupCallTrace(jp)
+	public pointcut callFinalCallTrace(Object o) :
+		callHangupCallTrace(o)
+		|| callPickupCallTrace(o)
 	;
 }
