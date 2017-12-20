@@ -4,4 +4,5 @@ import java.lang.annotation.*;
 
 @Target(ElementType.FIELD)
 public @interface UniqueId {
+	
 }
