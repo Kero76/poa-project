@@ -11,9 +11,8 @@ public privileged aspect Pointcuts {
    * @param c
    *  The instantiate Connection.
    */
-  public pointcut constructorInstantiationConnection(newcode.domain.telecom.v2.connect.Connection c) :
+  public pointcut constructorInstantiationConnection() :
     execution(newcode.domain.telecom.v2.connect.Connection.new(..))
-    && this(c)
   ;
   
   /**
@@ -34,41 +33,22 @@ public privileged aspect Pointcuts {
     call(void newcode.domain.telecom.v2.connect.Connection.drop(..))
   ;
   
-  /**
-   * Pointcut who catch the execution of constructor for the Connection object.
-   * 
-   * @param c
-   *  The instantiate Connection.
-   */
-  
-  
-  
   // BILLING
   /**
    * Pointcut which catches the execution of constructor for the Customer object.
-   * 
-   * @param c
-   *  The Customer instance.
    */
-  public pointcut constructorInstantiationCustomer(newcode.domain.telecom.v2.connect.Customer c) :
+  public pointcut constructorInstantiationCustomer() :
     execution(newcode.domain.telecom.v2.connect.Customer.new(..))
-    && this(c)
   ;
   
   /**
-   * Pointcut to catch when a user pick up his phone.
-   */
-  public pointcut pickUpCustomerCall() : 
-    call(void newcode.domain.telecom.v2.connect.ICustomer.pickUp(..))
-  ;
-  
-  /**
-   * Pointcut to catch when a user hangh up his phone.
+   * Pointcut to catch when a user hang up his phone.
    */
   public pointcut hangUpCustomerCall() : 
     call(void newcode.domain.telecom.v2.connect.ICustomer.hangUp(..))
   ;
 
+  // UNICITY
   /**
    * Check if the annotation @UniqueId is used for
    * annotate the attribute Customer.name
@@ -85,8 +65,8 @@ public privileged aspect Pointcuts {
    * @see newcode.domain.telecom.v2.common.Config
    */
   public pointcut unicityPolicyUnsatisfied() :  
-    set(@UniqueId private !final String+ newcode..*.name)
-    || set(@UniqueId private final !String+ newcode..*.name)
+    set(@UniqueId private !final String+ newcode..*.name) || 
+    set(@UniqueId private final !String+ newcode..*.name)
   ;
     
   /**
@@ -100,7 +80,7 @@ public privileged aspect Pointcuts {
    * @see newcode.crosscut.telecom.v2.unicity.EnforceUniticy
    */
   public pointcut constructorCustomerCall(String name, int ac) :
-    call(newcode.domain.telecom.v2.connect.Customer.new(String, int)) 
-    && args(name, ac)
+    call(newcode.domain.telecom.v2.connect.Customer.new(String, int)) &&
+    args(name, ac)
   ;
 }
