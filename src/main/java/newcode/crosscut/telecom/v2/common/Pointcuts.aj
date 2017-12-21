@@ -48,7 +48,7 @@ public aspect Pointcuts {
 	 * @see newcode.domain.telecom.v2.connect.ICustomer
 	 */
 	public pointcut customerCallTrace() :
-		call(* newcode.domain.telecom.v2.connect.ICustomer+.*(..))
+		call(* newcode.domain.telecom.v2.connect.ICustomer+.call(..))
 	;
 	
 	/**
