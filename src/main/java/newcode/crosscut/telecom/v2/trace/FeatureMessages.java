@@ -3,6 +3,20 @@ package newcode.crosscut.telecom.v2.trace;
 public class FeatureMessages {
 	
 	/**
+	 * Default repeat value.
+	 * 
+	 * @see FeatureMessages.separatorLine()
+	 */
+	public static final int DEFAULT_REPEAT_SIZE = 72;
+	
+	/**
+	 * Default separator character show.
+	 * 
+	 * @see FeatureMessages.separatorLine()
+	 */
+	public static final char DEFAULT_CHAR_SEPARATOR = ';';
+	
+	/**
 	 * Static method must call to log behavior of feature bill, 
 	 * when the customer call with success (with complete status for connection).
 	 * 
@@ -118,5 +132,23 @@ public class FeatureMessages {
 				"%s(COMPLETE -> DROPPED)\nTemps de connexion : %d \nMontant de la connexion longue distance : %f", 
 				connection, seconds, price
 		);
+	}
+	
+	/**
+	 * Show a line separator with specific separator char.
+	 *  
+	 * @param separatorChar
+	 * 	Character use to generate the line separator.
+	 * @param repeat
+	 * 	The number of separatorChar will be create for the line.
+	 * @return
+	 * 	
+	 */
+	public static String separatorLine(char separatorChar, int repeat) {
+		StringBuilder sb = new StringBuilder();
+		for (int i = 0; i < repeat; ++i) {
+			sb.append(separatorChar);
+		}
+		return sb.toString();
 	}
 }
