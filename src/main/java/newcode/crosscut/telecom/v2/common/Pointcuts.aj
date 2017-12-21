@@ -2,8 +2,6 @@ package newcode.crosscut.telecom.v2.common;
 
 import newcode.domain.telecom.v2.connect.*;
 
-import org.aspectj.lang.JoinPoint;
-
 import newcode.crosscut.telecom.v2.unicity.UniqueId;
 
 public aspect Pointcuts {
@@ -47,35 +45,26 @@ public aspect Pointcuts {
 	// TRACE
 	/**
 	 * 
-	 * @param o
-	 * 	Object who call methods catch by pointcut.
 	 * @see newcode.domain.telecom.v2.connect.ICustomer
 	 */
-	public pointcut customerCallTrace(Object o) :
+	public pointcut customerCallTrace() :
 		call(* newcode.domain.telecom.v2.connect.ICustomer+.*(..))
-		&& target(o);
 	;
 	
 	/**
 	 * 
-	 * @param o
-	 * 	Object who call methods catch by pointcut.
 	 * @see newcode.domain.telecom.v2.connect.ICustomer.hangUp()
 	 */
-	public pointcut customerHangupCallTrace(Object o) :
+	public pointcut customerHangupCallTrace() :
 		call(* newcode.domain.telecom.v2.connect.ICustomer+.hangUp(..))
-		&& target(o)
 	;
 	
 	/**
 	 * 
-	 * @param o
-	 * 	Object who call methods catch by pointcut.
 	 * @see newcode.domain.telecom.v2.connect.ICustomer.hangUp()
 	 */
-	public pointcut customerPickupCallTrace(Object o) :
+	public pointcut customerPickupCallTrace() :
 		call(* newcode.domain.telecom.v2.connect.ICustomer+.pickUp(..))
-		&& target(o)
 	;
 	
 	/**
@@ -86,54 +75,43 @@ public aspect Pointcuts {
 	 * @see newcode.crosscut.telecom.v2.common.Config.customerHangupCallTrace(jp)
 	 * @see newcode.crosscut.telecom.v2.common.Config.customerPickupCallTrace(jp)
 	 */
-	public pointcut customerFinalCallTrace(Object o) :
-		customerCallTrace(o)
-		|| customerHangupCallTrace(o)
-		|| customerPickupCallTrace(o)
+	public pointcut customerFinalCallTrace() :
+		customerCallTrace()
+		|| customerHangupCallTrace()
+		|| customerPickupCallTrace()
 	;
 	
 	/**
 	 * 
-	 * @param o
-	 * 	Object who call methods catch by pointcut.
 	 * @see newcode.domain.telecom.v2.connect.ICall+.invite()
 	 */
-	public pointcut callInviteCallTrace(Object o) :
+	public pointcut callInviteCallTrace() :
 		call(* newcode.domain.telecom.v2.connect.ICall+.invite(..))
-		&& target(o)
 	;
 	
 	/**
 	 * 
-	 * @param o
-	 * 	Object who call methods catch by pointcut.
 	 * @see newcode.domain.telecom.v2.connect.ICall+.hangUp()
 	 */
-	public pointcut callHangupCallTrace(Object o) :
+	public pointcut callHangupCallTrace() :
 		call(* newcode.domain.telecom.v2.connect.ICall+.hangUp(..))
-		&& target(o)
 	;
 
 	/**
 	 * 
-	 * @param o
-	 * 	Object who call methods catch by pointcut.
 	 * @see newcode.domain.telecom.v2.connect.ICall+.pickUp()
 	 */
-	public pointcut callPickupCallTrace(Object o) :
+	public pointcut callPickupCallTrace() :
 		call(* newcode.domain.telecom.v2.connect.ICall+.pickUp(..))
-		&& target(o)
 	;
 	
 	/**
 	 * 
-	 * @param o
-	 * 	Object who call methods catch by pointcut.
 	 * @see newcode.crosscut.telecom.v2.common.Config.callHangupCallTrace(jp)
 	 * @see newcode.crosscut.telecom.v2.common.Config.callPickupCallTrace(jp)
 	 */
-	public pointcut callFinalCallTrace(Object o) :
-		callHangupCallTrace(o)
-		|| callPickupCallTrace(o)
+	public pointcut callFinalCallTrace() :
+		callHangupCallTrace()
+		|| callPickupCallTrace()
 	;
 }
