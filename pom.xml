@@ -77,7 +77,7 @@
             <!-- automatically creates the classpath using all project dependencies,
                  also adding the project build directory -->
             <classpath/>
-            <argument>fiche6.ihm.Rainbow</argument>
+            <argument>newcode.domain.telecom.v2.Telecom</argument>
           </arguments>
         </configuration>
       </plugin>
