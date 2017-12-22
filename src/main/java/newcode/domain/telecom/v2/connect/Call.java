@@ -77,7 +77,7 @@ public class Call implements ICall {
     public void hangUp(ICustomer x) {
         Contract.checkCondition(x != null);
         Contract.checkCondition(x == caller || isConnectedWith(x));
-
+        
         if (x == caller) {
             for (ICustomer r : pending.keySet()) {
                 Connection con = pending.get(r);

@@ -76,5 +76,5 @@ class Connection {
     
     // TYPES IMBRIQUES
 
-    enum State { PENDING, COMPLETE, DROPPED }
+	enum State { PENDING, COMPLETE, DROPPED }
 }
