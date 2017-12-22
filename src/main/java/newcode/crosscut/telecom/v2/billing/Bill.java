@@ -1,21 +1,17 @@
 package newcode.crosscut.telecom.v2.billing;
 
+import newcode.domain.telecom.v2.connect.ICustomer;
+
 public class Bill {
-	
-	/**
-	 * Price of one second.
-	 */
-	private static final double SECOND_PRICE = 0.01;
-	
-	/**
-	 * Compute the price of call
-	 * 
-	 * @param seconds
-	 * 	The duration of the call.
-	 * @return
-	 * 	Price of call.
-	 */
-	public static double computePrice(int seconds) {
-		return Bill.SECOND_PRICE * seconds;
-	}
+  public static int computePrice(ConnectionType type, int seconds) {
+    return type.getRate() * seconds;
+  }
+  
+  public static ConnectionType getConnectionType(ICustomer c1, ICustomer c2) {
+    if (c1.getAreaCode() == c2.getAreaCode()) {
+      return ConnectionType.LOCAL;
+    } else {
+      return ConnectionType.NATIONAL;
+    }
+  }  
 }
