@@ -72,7 +72,7 @@ public class FeatureMessages {
 	public static String timeConnectionNullToPendingTracing(String connection) {
 		return String.format(
 				"%s(null -> PENDING)", 
-				connection				
+				connection
 		);
 	}
 	
@@ -88,7 +88,7 @@ public class FeatureMessages {
 	public static String timeConnectionPendingToCompleteTracing(String connection) {
 		return String.format(
 				"%s(PENDING -> COMPLETE)", 
-				connection				
+				connection
 		);
 	}
 	
@@ -103,6 +103,8 @@ public class FeatureMessages {
 	 * 	The number of seconds when the connection during open.
 	 * @param price
 	 * 	The price of the connection.
+	 * @param indent
+	 * 	The indentation needed to show correctly the trace.
 	 * @return
 	 * 	A beautiful string with all information to log on logger.
 	 */
@@ -124,6 +126,8 @@ public class FeatureMessages {
 	 * 	The number of seconds when the connection during open.
 	 * @param price
 	 * 	The price of the connection.
+	 * @param indent
+	 * 	The indentation needed to show correctly the trace.
 	 * @return
 	 * 	A beautiful string with all information to log on logger.
 	 */

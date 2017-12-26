@@ -1,8 +1,7 @@
 package newcode.crosscut.telecom.v2.common;
 
-import newcode.domain.telecom.v2.connect.*;
-
 import newcode.crosscut.telecom.v2.unicity.UniqueId;
+import newcode.domain.telecom.v2.connect.Customer;
 
 public privileged aspect Pointcuts {
   // UNICITY  
@@ -169,6 +168,4 @@ public privileged aspect Pointcuts {
 	  execution(void newcode.domain.telecom.v2.simulate.Simulation.runTest2()) ||
 	  execution(void newcode.domain.telecom.v2.simulate.Simulation.runTest3())
   ;
-  
-  
 }

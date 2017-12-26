@@ -18,6 +18,14 @@ public privileged aspect TimeTracing {
 		);
 	}
 	
+	after(newcode.domain.telecom.v2.connect.Connection c) : Pointcuts.completeConnectionCall() && target(c) {
+		System.out.println(
+			FeatureMessages.timeConnectionPendingToCompleteTracing(
+				c.toString().substring(c.toString().lastIndexOf('.') + 1)
+			)
+		);
+	}
+	
 	after(newcode.domain.telecom.v2.connect.Connection c) : Pointcuts.dropConnectionCall() && target(c) {
 		Customer caller = (Customer)c.getCaller();
 		Customer callee = (Customer)c.getCallee();
