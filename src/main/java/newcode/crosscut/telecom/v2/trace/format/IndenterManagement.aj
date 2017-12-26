@@ -10,16 +10,8 @@ public aspect IndenterManagement {
 	private AbstractFormatter formatter = new SpaceFormatter();
 
 	pointcut stackTraceIndent() :
-		Pointcuts.customerCallTrace() 		||
-		Pointcuts.customerHangupCallTrace() ||
-		Pointcuts.customerPickupCallTrace() ||
-		Pointcuts.callInviteCallTrace() 	||
-		Pointcuts.callHangupCallTrace() 	||
-		Pointcuts.callPickupCallTrace()	 	|| 
-		Pointcuts.hangUpCustomerCall()		||
-		Pointcuts.dropConnectionCall()		|| 
-		Pointcuts.completeConnectionCall()  ||
-		Pointcuts.constructorInstantiationConnection()
+		Pointcuts.customerFinalCallTrace()
+		|| Pointcuts.callFinalCallTrace()
 	;
 	
 	after() : stackTraceIndent() {
@@ -37,9 +29,9 @@ public aspect IndenterManagement {
 	}
 	
 	pointcut stackTraceLineReturn() :
-		Pointcuts.customerCallTrace() 		||
-		Pointcuts.customerHangupCallTrace() ||
-		Pointcuts.customerPickupCallTrace() 
+		Pointcuts.customerCallTrace()
+		|| Pointcuts.customerHangupCallTrace()
+		|| Pointcuts.customerPickupCallTrace()
 	;
 	
 	after() : stackTraceLineReturn() {

@@ -66,13 +66,15 @@ public class FeatureMessages {
 	 * 
 	 * @param connection
 	 * 	The memory address of the object connection.
+	 * @param indent
+	 * 	The indentation needed to show correctly the trace.
 	 * @return
 	 * 	A beautiful string with all information to log on logger.
 	 */
-	public static String timeConnectionNullToPendingTracing(String connection) {
+	public static String timeConnectionNullToPendingTracing(String connection, String indent) {
 		return String.format(
-				"%s(null -> PENDING)", 
-				connection
+				"%s%s(null -> PENDING)", 
+				indent, connection
 		);
 	}
 	
@@ -82,13 +84,15 @@ public class FeatureMessages {
 	 * 
 	 * @param connection
 	 * 	The memory address of the object connection.
+	 * @param indent
+	 * 	The indentation needed to show correctly the trace.
 	 * @return
 	 * 	A beautiful string with all information to log on logger.
 	 */
-	public static String timeConnectionPendingToCompleteTracing(String connection) {
+	public static String timeConnectionPendingToCompleteTracing(String connection, String indent) {
 		return String.format(
-				"%s(PENDING -> COMPLETE)", 
-				connection
+				"%s%s(PENDING -> COMPLETE)", 
+				indent, connection
 		);
 	}
 	
@@ -110,8 +114,8 @@ public class FeatureMessages {
 	 */
 	public static String timeConnectionCompleteToDroppedAndLocalConnexionTracing(String connection, int seconds, double price, String indent) {
 		return String.format(
-				"%s(COMPLETE -> DROPPED)\n%sTemps de connexion : %d \n%sMontant de la connexion locale : %f", 
-				connection, indent, seconds, indent, price
+				"%s%s(COMPLETE -> DROPPED)\n%sTemps de connexion : %d \n%sMontant de la connexion locale : %f", 
+				indent, connection, indent, seconds, indent, price
 		);
 	}
 	
@@ -133,8 +137,8 @@ public class FeatureMessages {
 	 */
 	public static String timeConnectionCompleteToDroppedAndDistanteConnexionTracing(String connection, int seconds, double price, String indent) {
 		return String.format(
-				"%s(COMPLETE -> DROPPED)\n%sTemps de connexion : %d \n%sMontant de la connexion longue distance : %f", 
-				connection, indent, seconds, indent, price
+				"%s%s(COMPLETE -> DROPPED)\n%sTemps de connexion : %d \n%sMontant de la connexion longue distance : %f", 
+				indent, connection, indent, seconds, indent, price
 		);
 	}
 	

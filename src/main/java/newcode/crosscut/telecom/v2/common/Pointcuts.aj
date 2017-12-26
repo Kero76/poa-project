@@ -4,7 +4,6 @@ import newcode.crosscut.telecom.v2.unicity.UniqueId;
 import newcode.domain.telecom.v2.connect.Customer;
 
 public privileged aspect Pointcuts {
-  // UNICITY  
   // UNICITY
   /**
    * Check if the annotation @UniqueId is used for
@@ -123,7 +122,8 @@ public privileged aspect Pointcuts {
    * @see newcode.crosscut.telecom.v2.common.Config.callPickupCallTrace(jp)
    */
   public pointcut callFinalCallTrace() :
-    callHangupCallTrace()
+    callInviteCallTrace()
+    || callHangupCallTrace()
     || callPickupCallTrace()
   ;
   
@@ -151,13 +151,6 @@ public privileged aspect Pointcuts {
    */
   public pointcut constructorInstantiationCustomer() :
     execution(newcode.domain.telecom.v2.connect.Customer.new(..))
-  ;
-  
-  /**
-   * Pointcut to catch when a user hang up his phone.
-   */
-  public pointcut hangUpCustomerCall() : 
-    call(void newcode.domain.telecom.v2.connect.ICustomer.hangUp(..))
   ;
   
   /**

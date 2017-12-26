@@ -1,14 +1,8 @@
 package newcode.crosscut.telecom.v2.billing;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Set;
-
 import newcode.crosscut.telecom.v2.common.Pointcuts;
-import newcode.domain.telecom.v2.connect.Call;
 import newcode.domain.telecom.v2.connect.Customer;
 import newcode.domain.telecom.v2.connect.ICall;
-import newcode.domain.telecom.v2.connect.ICustomer;
 
 public privileged aspect BillManagement {
 	
@@ -55,7 +49,7 @@ public privileged aspect BillManagement {
 	 * @param c
 	 * 	The customer who must add call price.
 	 */
-	void around(Customer c) : Pointcuts.hangUpCustomerCall() && this(c) {
+	void around(Customer c) : Pointcuts.customerHangupCallTrace() && this(c) {
 		// Before action, get Call and associated caller and get seconds for the call.
 		ICall callObject = c.getCall();
 		Customer caller = (Customer) callObject.getCaller();
@@ -65,7 +59,5 @@ public privileged aspect BillManagement {
 		
 		// After action, compute the price to add on Customer. 
 		caller.addPrice(Bill.computePrice(caller.getCallDuration()));
-//		System.out.println("Caller : " + caller.getName() + " must paid " + caller.getCallPrice() + 
-//				" because it call during : " + caller.getCallDuration() + " and call totally : " + caller.getCallTotalDuration());
 	}
 }
