@@ -13,14 +13,13 @@ public aspect IndenterManagement {
 		Pointcuts.customerCallTrace() 		||
 		Pointcuts.customerHangupCallTrace() ||
 		Pointcuts.customerPickupCallTrace() ||
-		Pointcuts.customerFinalCallTrace() 	||
 		Pointcuts.callInviteCallTrace() 	||
 		Pointcuts.callHangupCallTrace() 	||
-		Pointcuts.callPickupCallTrace()	 	||
-		Pointcuts.callFinalCallTrace() 		|| 
+		Pointcuts.callPickupCallTrace()	 	|| 
 		Pointcuts.hangUpCustomerCall()		||
 		Pointcuts.dropConnectionCall()		|| 
-		Pointcuts.completeConnectionCall()
+		Pointcuts.completeConnectionCall()  ||
+		Pointcuts.constructorInstantiationConnection()
 	;
 	
 	after() : stackTraceIndent() {
@@ -35,5 +34,15 @@ public aspect IndenterManagement {
 			formatter.format(Counter.getInstance().getCounter())
 		);
 		Counter.getInstance().increment();
+	}
+	
+	pointcut stackTraceLineReturn() :
+		Pointcuts.customerCallTrace() 		||
+		Pointcuts.customerHangupCallTrace() ||
+		Pointcuts.customerPickupCallTrace() 
+	;
+	
+	after() : stackTraceLineReturn() {
+		System.out.print(System.getProperty("line.separator"));
 	}
 }

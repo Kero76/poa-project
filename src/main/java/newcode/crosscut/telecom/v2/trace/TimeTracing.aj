@@ -18,6 +18,14 @@ public privileged aspect TimeTracing {
 		);
 	}
 	
+	after(newcode.domain.telecom.v2.connect.Connection c) : Pointcuts.constructorInstantiationConnection() && this(c) {
+		System.out.println(
+			FeatureMessages.timeConnectionNullToPendingTracing(
+				c.toString().substring(c.toString().lastIndexOf('.') + 1)
+			)
+		);
+	}
+	
 	after(newcode.domain.telecom.v2.connect.Connection c) : Pointcuts.completeConnectionCall() && target(c) {
 		System.out.println(
 			FeatureMessages.timeConnectionPendingToCompleteTracing(
@@ -50,6 +58,6 @@ public privileged aspect TimeTracing {
 					formatter.format(Counter.getInstance().getCounter() - 1)
 				)
 			);
-		}		
+		}
 	}
 }
