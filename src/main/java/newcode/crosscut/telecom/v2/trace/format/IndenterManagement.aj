@@ -17,7 +17,9 @@ public aspect IndenterManagement {
 		Pointcuts.callInviteCallTrace() 	||
 		Pointcuts.callHangupCallTrace() 	||
 		Pointcuts.callPickupCallTrace()	 	||
-		Pointcuts.callFinalCallTrace() 
+		Pointcuts.callFinalCallTrace() 		|| 
+		Pointcuts.hangUpCustomerCall()		||
+		Pointcuts.dropConnectionCall()
 	;
 	
 	after() : stackTraceIndent() {

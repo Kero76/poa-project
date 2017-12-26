@@ -65,7 +65,7 @@ public privileged aspect BillManagement {
 		
 		// After action, compute the price to add on Customer. 
 		caller.addPrice(Bill.computePrice(caller.getCallDuration()));
-		System.out.println("Caller : " + caller.getName() + " must paid " + caller.getCallPrice() + 
-				" because it call during : " + caller.getCallDuration() + " and call totally : " + caller.getCallTotalDuration());
+//		System.out.println("Caller : " + caller.getName() + " must paid " + caller.getCallPrice() + 
+//				" because it call during : " + caller.getCallDuration() + " and call totally : " + caller.getCallTotalDuration());
 	}
 }

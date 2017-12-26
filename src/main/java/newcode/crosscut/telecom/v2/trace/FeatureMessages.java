@@ -106,10 +106,10 @@ public class FeatureMessages {
 	 * @return
 	 * 	A beautiful string with all information to log on logger.
 	 */
-	public static String timeConnectionCompleteToDroppedAndLocalConnexionTracing(String connection, int seconds, double price) {
+	public static String timeConnectionCompleteToDroppedAndLocalConnexionTracing(String connection, int seconds, double price, String indent) {
 		return String.format(
-				"%s(COMPLETE -> DROPPED)\nTemps de connexion : %d \nMontant de la connexion locale : %f", 
-				connection, seconds, price
+				"%s(COMPLETE -> DROPPED)\n%sTemps de connexion : %d \n%sMontant de la connexion locale : %f", 
+				connection, indent, seconds, indent, price
 		);
 	}
 	
@@ -127,10 +127,10 @@ public class FeatureMessages {
 	 * @return
 	 * 	A beautiful string with all information to log on logger.
 	 */
-	public static String timeConnectionCompleteToDroppedAndDistanteConnexionTracing(String connection, int seconds, double price) {
+	public static String timeConnectionCompleteToDroppedAndDistanteConnexionTracing(String connection, int seconds, double price, String indent) {
 		return String.format(
-				"%s(COMPLETE -> DROPPED)\nTemps de connexion : %d \nMontant de la connexion longue distance : %f", 
-				connection, seconds, price
+				"%s(COMPLETE -> DROPPED)\n%sTemps de connexion : %d \n%sMontant de la connexion longue distance : %f", 
+				connection, indent, seconds, indent, price
 		);
 	}
 	

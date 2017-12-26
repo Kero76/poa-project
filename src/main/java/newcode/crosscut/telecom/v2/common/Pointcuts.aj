@@ -169,4 +169,6 @@ public privileged aspect Pointcuts {
 	  execution(void newcode.domain.telecom.v2.simulate.Simulation.runTest2()) ||
 	  execution(void newcode.domain.telecom.v2.simulate.Simulation.runTest3())
   ;
+  
+  
 }
