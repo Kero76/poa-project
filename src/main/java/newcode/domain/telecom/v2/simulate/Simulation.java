@@ -21,8 +21,8 @@ public class Simulation {
      */
     public void run() {
         runTest1();
-//        runTest2();
-//        runTest3();
+        runTest2();
+        runTest3();
     }
     
     // OUTILS

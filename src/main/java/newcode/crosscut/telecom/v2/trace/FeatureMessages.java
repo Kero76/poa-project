@@ -14,7 +14,7 @@ public class FeatureMessages {
 	 * 
 	 * @see FeatureMessages.separatorLine()
 	 */
-	public static final char DEFAULT_CHAR_SEPARATOR = ';';
+	public static final char DEFAULT_CHAR_SEPARATOR = '-';
 	
 	/**
 	 * Static method must call to log behavior of feature bill, 
@@ -127,7 +127,7 @@ public class FeatureMessages {
 	 * @return
 	 * 	A beautiful string with all information to log on logger.
 	 */
-	public static String timeConnectionCompleteToDroppedAndRemoteConnexionTracing(String connection, int seconds, double price) {
+	public static String timeConnectionCompleteToDroppedAndDistanteConnexionTracing(String connection, int seconds, double price) {
 		return String.format(
 				"%s(COMPLETE -> DROPPED)\nTemps de connexion : %d \nMontant de la connexion longue distance : %f", 
 				connection, seconds, price

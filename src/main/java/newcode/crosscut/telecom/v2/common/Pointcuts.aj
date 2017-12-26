@@ -160,4 +160,13 @@ public privileged aspect Pointcuts {
   public pointcut hangUpCustomerCall() : 
     call(void newcode.domain.telecom.v2.connect.ICustomer.hangUp(..))
   ;
+  
+  /**
+   * Catch execution of method runTestX().
+   */
+  public pointcut executionSimulationRunTest() :
+	  execution(void newcode.domain.telecom.v2.simulate.Simulation.runTest1()) ||
+	  execution(void newcode.domain.telecom.v2.simulate.Simulation.runTest2()) ||
+	  execution(void newcode.domain.telecom.v2.simulate.Simulation.runTest3())
+  ;
 }
