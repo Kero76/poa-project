@@ -114,7 +114,7 @@ public privileged aspect TimeManagement {
 		c.stopTimer();
 		Customer caller = (Customer)c.getCaller();
 		int duration = c.getTimer().getTime();
-		caller.addDuration(duration);		
+		caller.addDuration(duration);
 		caller.addTotalDuration(duration);
 	}
 }

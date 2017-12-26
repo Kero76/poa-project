@@ -1,11 +1,7 @@
 package newcode.crosscut.telecom.v2.billing;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Set;
-
 import newcode.crosscut.telecom.v2.common.Pointcuts;
-import newcode.domain.telecom.v2.connect.*;
+import newcode.domain.telecom.v2.connect.Customer;
 
 public privileged aspect BillManagement {
 	
@@ -45,36 +41,11 @@ public privileged aspect BillManagement {
 		c.constructorInstantiationCustomer();
 	}
   
-	/**
-	 * Advice used to get Call and Customer before the action, 
-	 * and add new price of the call after the customer hang up the connection.
-	 * 
-	 * @param c
-	 * 	The customer who must add call price.
-	 */
-	/*void around(Customer c) : Pointcuts.hangUpCustomerCall() && this(c) {
-		// Before action, get Call and associated caller and get seconds for the call.
-		ICall callObject = c.getCall();
-		Customer caller = (Customer) callObject.getCaller();
-		
-		// Process action.
-		proceed(c);
-		
-		// After action, compute the price to add on Customer. 
-		caller.addPrice(Bill.computePrice(caller.getCallDuration()));
-		System.out.println("Caller : " + caller.getName() + " must paid " + caller.getCallPrice() + 
-				" because it call during : " + caller.getCallDuration() + " and call totally : " + caller.getCallTotalDuration());
-	}*/
-  
-  before(newcode.domain.telecom.v2.connect.Connection c) : Pointcuts.dropConnectionCall() && this(c) {
+  after(newcode.domain.telecom.v2.connect.Connection c) : Pointcuts.dropConnectionCall() && target(c) {
     Customer caller = (Customer) c.getCaller();
     caller.addPrice(Bill.computePrice(c.type, c.getTimer().getTime()));
-    System.out.println("Caller : " + caller.getName() + " must paid " + caller.getCallPrice() + 
-      " because it call during : " + caller.getCallDuration() + " and call totally : " + caller.getCallTotalDuration());
   }
   
-  
-
   /**
    * Add an attribute type to Connection.
   */  
