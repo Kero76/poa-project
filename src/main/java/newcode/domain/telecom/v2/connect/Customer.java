@@ -9,8 +9,8 @@ public class Customer implements ICustomer {
     
     // ATTRIBUTS
     
-	@UniqueId 
-	private final String name;
+    @UniqueId 
+    private final String name;
     private final int area;
     private ICall call;
 

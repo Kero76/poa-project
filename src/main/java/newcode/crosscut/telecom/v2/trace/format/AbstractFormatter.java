@@ -9,19 +9,19 @@ package newcode.crosscut.telecom.v2.trace.format;
  * @version 1.0
  */
 abstract public class AbstractFormatter {
-	
-	/**
-	 * The separator to show more easily the level of implication you are. 
-	 */
-	public static final char SEPARATOR = '|';
+  
+  /**
+   * The separator to show more easily the level of implication you are. 
+   */
+  public static final char SEPARATOR = '|';
 
-	/**
-	 * Format with specific value.
-	 * 
-	 * @param step 
-	 * 	Step to add specific value of formatter.
-	 * @return
-	 * 	A string format with specific value.
-	 */
-	public abstract String format(int step);
+  /**
+   * Format with specific value.
+   * 
+   * @param step 
+   *  Step to add specific value of formatter.
+   * @return
+   *  A string format with specific value.
+   */
+  public abstract String format(int step);
 }

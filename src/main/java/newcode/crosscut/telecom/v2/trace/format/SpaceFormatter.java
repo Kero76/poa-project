@@ -9,20 +9,20 @@ package newcode.crosscut.telecom.v2.trace.format;
  * @version 1.0
  */
 public class SpaceFormatter extends AbstractFormatter {
-	
-	/**
-	 * Attribute use to add two space for each level of implication.
-	 */
-	public static final String SPACES = "  ";
+  
+  /**
+   * Attribute use to add two space for each level of implication.
+   */
+  public static final String SPACES = "  ";
 
-	@Override
-	public String format(int step) {
-		StringBuilder sb = new StringBuilder();
-		for(int i = 0; i < step; ++i) {
-			sb.append(AbstractFormatter.SEPARATOR);
-			sb.append(SpaceFormatter.SPACES);
-		}
-		
-		return sb.toString();
-	}
+  @Override
+  public String format(int step) {
+    StringBuilder sb = new StringBuilder();
+    for(int i = 0; i < step; ++i) {
+      sb.append(AbstractFormatter.SEPARATOR);
+      sb.append(SpaceFormatter.SPACES);
+    }
+    
+    return sb.toString();
+  }
 }
