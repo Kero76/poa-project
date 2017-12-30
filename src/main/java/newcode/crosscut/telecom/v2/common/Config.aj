@@ -1,10 +1,10 @@
 package newcode.crosscut.telecom.v2.common;
 
 public aspect Config {
-    /**
-     * Throw an error when a field with @UniqueId is not 
-     * sign with final keyword or String type. 
-     */
+  /**
+   * Throw an error when a field with @UniqueId is not 
+   * sign with final keyword or String type. 
+   */
   declare error : 
     Pointcuts.unicityPolicyUnsatisfied() :
     "An error occured because the attribute annotate by @UniqueId "
@@ -12,13 +12,14 @@ public aspect Config {
   ;
     
   /**
-   * Declare precedence for billing and time feature.
+   * Declare precedence between features.
    */
-    declare precedence : 
-      newcode.crosscut.telecom.v2.trace.format.IndenterManagement,
-      newcode.crosscut.telecom.v2.trace.SimulationMessageManagement,
-      newcode.crosscut.telecom.v2.trace.TimeTracing,
-      newcode.crosscut.telecom.v2.billing.BillManagement,
-      newcode.crosscut.telecom.v2.time.TimeManagement
-    ;
+  declare precedence : 
+    newcode.crosscut.telecom.v2.trace.format.IndenterManagement,
+    newcode.crosscut.telecom.v2.trace.SimulationMessageManagement,
+    newcode.crosscut.telecom.v2.trace.TimeTracing,
+    newcode.crosscut.telecom.v2.trace.FinalReportTracing,
+    newcode.crosscut.telecom.v2.billing.BillManagement,
+    newcode.crosscut.telecom.v2.time.TimeManagement
+  ;
 }
