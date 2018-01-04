@@ -8,18 +8,32 @@ import java.util.*;
 
 public aspect FinalReportTracing {
   private Set<Customer> callers = new HashSet<>();
+  private Set<Customer> callees = new HashSet<>();
   
-  after(ICustomer custObj) :
-    Pointcuts.callInstantiation()
-    && target(custObj) {
+  before(ICustomer customer) : Pointcuts.customerHangupCallTrace() && target(customer) {
+	  Customer caller = (Customer) customer.getCall().getCaller();
+	  for (ICustomer c : caller.getCall().getReceivers()) {
+	    	if (!callees.contains(c)) {
+	    		callees.add((Customer) c);
+	    	}
+	    }
+  }
+  
+  after(ICustomer custObj) : Pointcuts.callInstantiation() && target(custObj) {
     Customer caller = (Customer) custObj.getCall().getCaller();
     if (!callers.contains(caller)) {
       callers.add(caller);
     }
   }
   
-  after() :
-    Pointcuts.executionSimulationRunTest() {
+  after() : Pointcuts.executionSimulationRunTest() {
+    for (Customer callee : callees) {
+      System.out.println(
+        FeatureMessages.billCompleteTracing(
+          callee.getName(), callee.getAreaCode(), callee.getCallTotalDuration(), callee.getCallPrice()
+        )
+      );
+    }
     for (Customer caller : callers) {
       ICall callObj = caller.getCall();
       // Ici, l'interlocuteur est en attente d'un appel, dans le tracing affiche un etat de pending ... 
@@ -57,5 +71,6 @@ public aspect FinalReportTracing {
 //      }
     }
     callers.clear();
+    callees.clear();
   }
 }

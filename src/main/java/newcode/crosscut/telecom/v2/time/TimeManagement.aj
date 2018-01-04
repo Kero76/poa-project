@@ -112,9 +112,12 @@ public privileged aspect TimeManagement {
   
   after(newcode.domain.telecom.v2.connect.Connection c) : Pointcuts.dropConnectionCall() && target(c) {
     c.stopTimer();
-    Customer caller = (Customer)c.getCaller();
+    Customer caller = (Customer) c.getCaller();
+    Customer callee = (Customer) c.getCallee();
     int duration = c.getTimer().getTime();
     caller.addDuration(duration);
     caller.addTotalDuration(duration);
+    callee.addDuration(duration);
+    callee.addTotalDuration(duration);
   }
 }
