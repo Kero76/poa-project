@@ -9,12 +9,16 @@ public privileged aspect BillManagement {
    * Add an attribute callPrice on Customer.
    */
   private int newcode.domain.telecom.v2.connect.Customer.callPrice;
+  
+  
+  private int newcode.domain.telecom.v2.connect.Customer.callTotalPrice;
 
   /**
    * Instantiate callPrice for the connection object.
    */
   public void newcode.domain.telecom.v2.connect.Customer.constructorInstantiationCustomer() {
     callPrice = 0;
+    callTotalPrice = 0;
   }
 
   /**
@@ -23,12 +27,24 @@ public privileged aspect BillManagement {
   public int newcode.domain.telecom.v2.connect.Customer.getCallPrice() {
     return callPrice;
   }
+  
+  
+  public int newcode.domain.telecom.v2.connect.Customer.getCallTotalPrice() {
+	  return callTotalPrice;
+  }
 
   /**
    * Add the price on the maximum price who must paid by the customer.
    */
   public void newcode.domain.telecom.v2.connect.Customer.addPrice(int price) {
-    callPrice += price;
+    callPrice = price;
+  }
+  
+  /**
+   * Add the price on the maximum price who must paid by the customer.
+   */
+  public void newcode.domain.telecom.v2.connect.Customer.addTotalPrice(int price) {
+    callTotalPrice += price;
   }
   
   /**
@@ -44,6 +60,7 @@ public privileged aspect BillManagement {
   after(newcode.domain.telecom.v2.connect.Connection c) : Pointcuts.dropConnectionCall() && target(c) {
     Customer caller = (Customer) c.getCaller();
     caller.addPrice(Bill.computePrice(c.type, c.getTimer().getTime()));
+    caller.addTotalPrice(Bill.computePrice(c.type, c.getTimer().getTime()));
   }
   
   /**

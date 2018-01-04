@@ -27,10 +27,11 @@ public aspect BillTracing {
   }
   
   after() : Pointcuts.executionSimulationRunTest() {
+	System.out.print(System.getProperty("line.separator"));
     for (Customer callee : callees) {
       System.out.println(
         FeatureMessages.billCompleteTracing(
-          callee.getName(), callee.getAreaCode(), callee.getCallTotalDuration(), callee.getCallPrice()
+          callee.getName(), callee.getAreaCode(), callee.getCallTotalDuration(), callee.getCallTotalPrice()
         )
       );
     }
@@ -40,7 +41,7 @@ public aspect BillTracing {
       if (callObj != null && !callObj.noCalleePending()) {
         System.out.println(
           FeatureMessages.billPendingTracing(
-            caller.getName(), caller.getAreaCode(), "", caller.getCallPrice() // Manque le troisième élément, a savoir le nom de l'appelé.
+            caller.getName(), caller.getAreaCode(), "", caller.getCallTotalPrice() // Manque le troisième élément, a savoir le nom de l'appelé.
           )
         );
       } 
@@ -48,27 +49,10 @@ public aspect BillTracing {
       else {
         System.out.println(
           FeatureMessages.billCompleteTracing(
-            caller.getName(), caller.getAreaCode(), caller.getCallTotalDuration(), caller.getCallPrice()
+            caller.getName(), caller.getAreaCode(), caller.getCallTotalDuration(), caller.getCallTotalPrice()
           )
         );
       }
-//      if (callObj.noCalleePending()) {
-//        System.out.println(
-//          FeatureMessages.billCompleteTracing(
-//            caller.getName(), caller.getAreaCode(), caller.getCallDuration(), caller.getCallPrice()
-//          )
-//        );
-//      } else {
-//        for (ICustomer receiver : callObj.getReceivers()) {
-//          if (callObj.includes(receiver) && !callObj.isConnectedWith(receiver)) {
-//            System.out.println(
-//              FeatureMessages.billPendingTracing(
-//                receiver.getName(), receiver.getAreaCode(), caller.getName(), ((Customer) caller).getCallPrice()
-//              )
-//            );
-//          }
-//        }
-//      }
     }
     callers.clear();
     callees.clear();

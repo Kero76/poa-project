@@ -59,7 +59,7 @@ public privileged aspect TimeTracing {
           c.toString().substring(c.toString().lastIndexOf('.') + 1),
           c.getTimer().getTime(), 
           caller.getCallPrice(), 
-          formatter.format(Counter.getInstance().getCounter() - 1)
+          formatter.format(Counter.getInstance().getCounter())
         )
       );
     }
