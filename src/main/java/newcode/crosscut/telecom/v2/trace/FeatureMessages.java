@@ -33,7 +33,7 @@ public class FeatureMessages {
    */
   public static String billCompleteTracing(String name, int areaCode, int seconds, double price) {
     return String.format(
-        "%s[%d] a été connecté %d s pour un montant de %f", 
+        "%s[%d] a été connecté %d s pour un montant de %.0f", 
         name, areaCode, seconds, price
     );
   }
@@ -55,7 +55,7 @@ public class FeatureMessages {
    */
   public static String billPendingTracing(String name, int areaCode, String callerName, double price) {
     return String.format(
-        "%s[%d] est en attente de %s et son montant sera supérieur à %f", 
+        "%s[%d] est en attente de %s et son montant sera supérieur à %.0f", 
         name, areaCode, callerName, price
     );
   }
@@ -114,7 +114,7 @@ public class FeatureMessages {
    */
   public static String timeConnectionCompleteToDroppedAndLocalConnexionTracing(String connection, int seconds, double price, String indent) {
     return String.format(
-        "%s%s(COMPLETE -> DROPPED)\n%sTemps de connexion : %d \n%sMontant de la connexion locale : %f", 
+        "%s%s(COMPLETE -> DROPPED)\n%sTemps de connexion : %d \n%sMontant de la connexion locale : %.0f", 
         indent, connection, indent, seconds, indent, price
     );
   }
@@ -137,7 +137,7 @@ public class FeatureMessages {
    */
   public static String timeConnectionCompleteToDroppedAndDistanteConnexionTracing(String connection, int seconds, double price, String indent) {
     return String.format(
-        "%s%s(COMPLETE -> DROPPED)\n%sTemps de connexion : %d \n%sMontant de la connexion longue distance : %f", 
+        "%s%s(COMPLETE -> DROPPED)\n%sTemps de connexion : %d \n%sMontant de la connexion longue distance : %.0f", 
         indent, connection, indent, seconds, indent, price
     );
   }
