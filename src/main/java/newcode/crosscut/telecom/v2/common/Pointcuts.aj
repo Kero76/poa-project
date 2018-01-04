@@ -166,4 +166,10 @@ public privileged aspect Pointcuts {
   public pointcut callInstantiation() :
     execution(* newcode.domain.telecom.v2.connect.Customer.call(ICustomer))
   ;
+  
+  // Override method getCall to show properly the result.
+  public pointcut executionListToString() :
+	  withincode(* newcode.crosscut.telecom.v2.trace.SimulationMessages.listToString(..))
+	  && call(* newcode.domain.telecom.v2.connect.ICustomer.getCall())
+  ;
 }
