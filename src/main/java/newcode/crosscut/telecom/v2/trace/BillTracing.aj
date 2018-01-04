@@ -6,7 +6,7 @@ import newcode.domain.telecom.v2.connect.*;
 
 import java.util.*;
 
-public aspect FinalReportTracing {
+public aspect BillTracing {
   private Set<Customer> callers = new HashSet<>();
   private Set<Customer> callees = new HashSet<>();
   
