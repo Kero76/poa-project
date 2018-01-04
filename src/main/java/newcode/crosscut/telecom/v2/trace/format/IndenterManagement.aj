@@ -30,7 +30,6 @@ public aspect IndenterManagement {
 	
 	pointcut stackTraceLineReturn() :
 		Pointcuts.customerCallTrace()
-		|| Pointcuts.customerHangupCallTrace()
 		|| Pointcuts.customerPickupCallTrace()
 	;
 	
