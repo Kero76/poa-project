@@ -2,6 +2,7 @@ package newcode.crosscut.telecom.v2.common;
 
 import newcode.crosscut.telecom.v2.unicity.UniqueId;
 import newcode.domain.telecom.v2.connect.Customer;
+import newcode.domain.telecom.v2.connect.ICustomer;
 
 public privileged aspect Pointcuts {
   // UNICITY
@@ -154,16 +155,15 @@ public privileged aspect Pointcuts {
   ;
   
   
-  // FINAL REPORT
-  
+  // FINAL REPORT  
   /**
    * Catch execution of method runTestX().
    */
   public pointcut executionSimulationRunTest() :
-    within(newcode.domain.telecom.v2.simulate.Simulation.runTest*)
+     execution(void newcode.domain.telecom.v2.simulate.Simulation.runTest*())
   ;
   
   public pointcut callInstantiation() :
-    execution(newcode.domain.telecom.v2.connect.Call.new(..))
+    execution(* newcode.domain.telecom.v2.connect.Customer.call(ICustomer))
   ;
 }
