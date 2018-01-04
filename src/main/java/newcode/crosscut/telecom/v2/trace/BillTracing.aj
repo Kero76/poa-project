@@ -6,7 +6,7 @@ import newcode.domain.telecom.v2.connect.*;
 
 import java.util.*;
 
-public aspect BillTracing {
+public privileged aspect BillTracing {
   private Set<Customer> callers = new HashSet<>();
   private Set<Customer> callees = new HashSet<>();
   
@@ -39,12 +39,14 @@ public aspect BillTracing {
       ICall callObj = caller.getCall();
       // Ici, l'interlocuteur est en attente d'un appel, dans le tracing affiche un etat de pending ... 
       if (callObj != null && !callObj.noCalleePending()) {
-        System.out.println(
-          FeatureMessages.billPendingTracing(
-            caller.getName(), caller.getAreaCode(), "", caller.getCallTotalPrice() // Manque le troisième élément, a savoir le nom de l'appelé.
-          )
-        );
-      } 
+        for (ICustomer c : ((Call) callObj).pending.keySet()) {
+          System.out.println(
+            FeatureMessages.billPendingTracing(
+              caller.getName(), caller.getAreaCode(), c.getName(), caller.getCallTotalPrice() // Manque le troisième élément, a savoir le nom de l'appelé.
+            )
+          );
+        }
+      }
       // ... sinon l'ensemble des appels est terminés, et le tracing affiche le message de billing complet.
       else {
         System.out.println(
