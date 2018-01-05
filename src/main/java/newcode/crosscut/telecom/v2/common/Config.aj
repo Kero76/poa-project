@@ -16,9 +16,10 @@ public aspect Config {
    */
   declare precedence : 
     newcode.crosscut.telecom.v2.trace.format.IndenterManagement,
+    newcode.crosscut.telecom.v2.trace.CallStateTracing,
     newcode.crosscut.telecom.v2.trace.SimulationMessageManagement,
     newcode.crosscut.telecom.v2.trace.TimeTracing,
-    newcode.crosscut.telecom.v2.trace.FinalReportTracing,
+    newcode.crosscut.telecom.v2.trace.BillTracing,
     newcode.crosscut.telecom.v2.billing.BillManagement,
     newcode.crosscut.telecom.v2.time.TimeManagement
   ;

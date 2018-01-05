@@ -172,4 +172,13 @@ public privileged aspect Pointcuts {
 	  withincode(* newcode.crosscut.telecom.v2.trace.SimulationMessages.listToString(..))
 	  && call(* newcode.domain.telecom.v2.connect.ICustomer.getCall())
   ;
+  
+  // CALL STATE TRACING
+  
+  /**
+   * Catches a Call instantiation.
+  */
+  public pointcut callConstruction() :
+    execution(newcode.domain.telecom.v2.connect.ICall+.new(..));
+  ;
 }
