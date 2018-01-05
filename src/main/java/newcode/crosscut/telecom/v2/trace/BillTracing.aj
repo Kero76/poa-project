@@ -3,6 +3,7 @@ package newcode.crosscut.telecom.v2.trace;
 import newcode.crosscut.telecom.v2.common.Pointcuts;
 
 import newcode.domain.telecom.v2.connect.*;
+import newcode.domain.telecom.v2.simulate.Simulation;
 
 import java.util.*;
 
@@ -27,9 +28,9 @@ public privileged aspect BillTracing {
   }
   
   after() : Pointcuts.executionSimulationRunTest() {
-	System.out.print(System.getProperty("line.separator"));
+	Simulation.logger.info(System.getProperty("line.separator"));
     for (Customer callee : callees) {
-      System.out.println(
+      Simulation.logger.info(
         FeatureMessages.billCompleteTracing(
           callee.getName(), callee.getAreaCode(), callee.getCallTotalDuration(), callee.getCallTotalPrice()
         )
@@ -40,7 +41,7 @@ public privileged aspect BillTracing {
       // Ici, l'interlocuteur est en attente d'un appel, dans le tracing affiche un etat de pending ... 
       if (callObj != null && !callObj.noCalleePending()) {
         for (ICustomer c : ((Call) callObj).pending.keySet()) {
-          System.out.println(
+          Simulation.logger.info(
             FeatureMessages.billPendingTracing(
               caller.getName(), caller.getAreaCode(), c.getName(), caller.getCallTotalPrice() // Manque le troisième élément, a savoir le nom de l'appelé.
             )
@@ -49,7 +50,7 @@ public privileged aspect BillTracing {
       }
       // ... sinon l'ensemble des appels est terminés, et le tracing affiche le message de billing complet.
       else {
-        System.out.println(
+        Simulation.logger.info(
           FeatureMessages.billCompleteTracing(
             caller.getName(), caller.getAreaCode(), caller.getCallTotalDuration(), caller.getCallTotalPrice()
           )

@@ -26,7 +26,6 @@ public privileged aspect CallStateTracing {
     && this(callObj)
     && target(co) {
     callObj.dropped.add(co.getCallee());
-    System.out.println("added");
   }
 
   public String newcode.domain.telecom.v2.connect.Call.toString() {
