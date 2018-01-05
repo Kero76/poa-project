@@ -1,27 +1,44 @@
 package newcode.crosscut.telecom.v2.trace;
 
-import newcode.crosscut.telecom.v2.common.Pointcuts;
+import java.util.Map;
 
-public aspect CallStateTracing {
+import newcode.domain.telecom.v2.connect.ICustomer;
 
-	before() : Pointcuts.executionListToString() {
-		/*
-		 * Idees :
-		 * 	- Call.isConnectedWith(Customer x) permet de savoir si un Callee est en état Complete.
-		 *  - Call.includes(Customer x) permet de savoir si un Callee est en état Complete ou Pending.
-		 *  - Ainsi, si un Customer n'est présent dans aucun dès deux, alors il est Dropped, vu qu'il est nul part.
-		 *  - De plus, si un Callee est dans isConnectedWith mais non dans includes, alors il est en etat Complete forcément.
-		 *  - Donc on en conclut qu'un callee présent dans includes mais pas isConnectedwith nous permet d'affirmer qu'il est en état Pending.
-		 * 
-		 * A partir de ces données, on peut facilement savoir ou placer les gens, l'idée peut être de faire une Map<ETAT, List<Customer>> 
-		 * afin de répartir au final les custoemrs dans le bon endoir du résultat final.
-		 * Ensuite, il suffit de boucler sur la map pour répartir directement les gens aux bons endroits 
-		 * (en plaçant astucieusement les états dans l'ordre suivant : Pending / Complete / Dropped)
-		 * 
-		 * Pour récupérer la liste des Customer, l'utilisation d'un ThisJoinPoint permettrait de récupérer
-		 * l'ensemble des Customer que doit trairer la méthode SimulationMessages.listToString(Customer ... c).
-		 * Voilà pour l'idée principal de comment ça doit marcher en interne pour finaliser cette feature.
-		 */
+public privileged aspect CallStateTracing {
 	
+	public String newcode.domain.telecom.v2.connect.Call.toString() {
+		StringBuilder str = new StringBuilder();
+		str.append('<');
+		str.append(this.getCaller().getName());
+		str.append('|');
+		str.append(mapAsString((Map<ICustomer, newcode.domain.telecom.v2.connect.Connection>) this.pending));
+		str.append('|');
+		str.append(mapAsString((Map<ICustomer, newcode.domain.telecom.v2.connect.Connection>) this.complete));
+		str.append('|');
+		// Insert dropped string to complete process ;)
+		str.append('>');
+		return str.toString();
+	}
+	
+	/**
+	 * Build a String thanks to a Map.
+	 * 
+	 * @param map
+	 * 	Map to transform on String.
+	 * @return
+	 * 	The representation of the map as String.
+	 */
+	private String newcode.domain.telecom.v2.connect.Call.mapAsString(Map<ICustomer, newcode.domain.telecom.v2.connect.Connection> map) {
+		if (map.isEmpty()) {
+			return "";
+		} 
+		
+		StringBuilder str = new StringBuilder();
+		for (ICustomer c : map.keySet()) {
+			str.append(c.getName());
+			str.append(' ');
+		}
+		
+		return str.toString();
 	}
 }
