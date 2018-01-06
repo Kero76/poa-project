@@ -14,7 +14,7 @@ public aspect IndenterManagement {
 		|| Pointcuts.callFinalCallTrace()
 	;
 	
-	after() : stackTraceIndent() {
+	/*after() : stackTraceIndent() {
 		Counter.getInstance().decrement();
 		System.out.print(
 			formatter.format(Counter.getInstance().getCounter())
@@ -35,5 +35,5 @@ public aspect IndenterManagement {
 	
 	after() : stackTraceLineReturn() {
 		System.out.print(System.getProperty("line.separator"));
-	}
+	}*/
 }
