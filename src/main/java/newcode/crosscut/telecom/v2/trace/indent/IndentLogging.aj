@@ -11,11 +11,4 @@ public aspect IndentLogging {
     handler.setFormatter(new IndentFormatter());
     logger.setParent(null);
   }
-
-  private pointcut logged(Logger log, Level level, String mess) :
-    call(* newcode.crosscut.telecom.v2.trace.*.Simulation.logger.log(..))
-    && target(log)
-    && args(level, mess)
-    && !within(ContextIndentation)
-  ;
 }

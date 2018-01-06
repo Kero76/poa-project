@@ -14,9 +14,7 @@ public aspect Config {
   /**
    * Declare precedence between features.
    */
-  declare precedence : 
-    newcode.crosscut.telecom.v2.trace.LoggerManagement,
-    //newcode.crosscut.telecom.v2.trace.format.IndenterManagement,
+  declare precedence :
     newcode.crosscut.telecom.v2.trace.indent.IndentLogging,
     newcode.crosscut.telecom.v2.trace.SimulationMessageManagement
   ;
