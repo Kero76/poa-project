@@ -98,7 +98,7 @@ public aspect SimulationMessageManagement {
   after() : Pointcuts.stackTraceLineReturn() {
     newcode.crosscut.telecom.v2.trace.indent.IndentLogging.logger.log(
       Level.INFO, 
-      System.getProperty("line.separator"),
+      "",
       SystemContextIndentation.aspectOf().getDepth()
     );
   }
