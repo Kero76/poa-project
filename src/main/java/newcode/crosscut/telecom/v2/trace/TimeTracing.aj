@@ -1,9 +1,12 @@
 package newcode.crosscut.telecom.v2.trace;
 
+import java.util.logging.Level;
+
 import newcode.crosscut.telecom.v2.common.Pointcuts;
 import newcode.crosscut.telecom.v2.trace.format.AbstractFormatter;
 import newcode.crosscut.telecom.v2.trace.format.Counter;
 import newcode.crosscut.telecom.v2.trace.format.SpaceFormatter;
+import newcode.crosscut.telecom.v2.trace.indent.SystemContextIndentation;
 import newcode.domain.telecom.v2.connect.Customer;
 import newcode.domain.telecom.v2.simulate.Simulation;
 
@@ -14,29 +17,35 @@ public privileged aspect TimeTracing {
 
   // Add line separator between each runTest method.
   after() : Pointcuts.executionSimulationRunTest() {
-    Simulation.logger.info(
+    newcode.crosscut.telecom.v2.trace.indent.IndentLogging.logger.log(
+      Level.INFO, 
       FeatureMessages.separatorLine(
         FeatureMessages.DEFAULT_CHAR_SEPARATOR, 
         FeatureMessages.DEFAULT_REPEAT_SIZE
-      )
+      ),
+      SystemContextIndentation.aspectOf().getDepth()
     );
   }
   
   after(newcode.domain.telecom.v2.connect.Connection c) : Pointcuts.constructorInstantiationConnection() && this(c) {
-	Simulation.logger.info(
-      FeatureMessages.timeConnectionNullToPendingTracing(
+     newcode.crosscut.telecom.v2.trace.indent.IndentLogging.logger.log(
+        Level.INFO, 
+        FeatureMessages.timeConnectionNullToPendingTracing(
         c.toString().substring(c.toString().lastIndexOf('.') + 1),
         formatter.format(Counter.getInstance().getCounter())
-      )
+      ),
+      SystemContextIndentation.aspectOf().getDepth()
     );
   }
   
   after(newcode.domain.telecom.v2.connect.Connection c) : Pointcuts.completeConnectionCall() && target(c) {
-	Simulation.logger.info(
+    newcode.crosscut.telecom.v2.trace.indent.IndentLogging.logger.log(
+      Level.INFO, 
       FeatureMessages.timeConnectionPendingToCompleteTracing(
         c.toString().substring(c.toString().lastIndexOf('.') + 1),
         formatter.format(Counter.getInstance().getCounter())
-      )
+      ),
+      SystemContextIndentation.aspectOf().getDepth()
     );
   }
   
@@ -46,22 +55,26 @@ public privileged aspect TimeTracing {
     
     // Replace line by "if (c.type == ConnectionType.LOCAL)" 
     if (caller.getAreaCode() == callee.getAreaCode()) {
-      Simulation.logger.info(
+      newcode.crosscut.telecom.v2.trace.indent.IndentLogging.logger.log(
+        Level.INFO, 
         FeatureMessages.timeConnectionCompleteToDroppedAndLocalConnexionTracing(
           c.toString().substring(c.toString().lastIndexOf('.') + 1), 
           c.getTimer().getTime(), 
           caller.getCallPrice(), 
           formatter.format(Counter.getInstance().getCounter())
-        )
+        ),
+        SystemContextIndentation.aspectOf().getDepth()
       );
     } else {
-      Simulation.logger.info(
+      newcode.crosscut.telecom.v2.trace.indent.IndentLogging.logger.log(
+        Level.INFO, 
         FeatureMessages.timeConnectionCompleteToDroppedAndDistanteConnexionTracing(
           c.toString().substring(c.toString().lastIndexOf('.') + 1),
           c.getTimer().getTime(), 
           caller.getCallPrice(), 
           formatter.format(Counter.getInstance().getCounter())
-        )
+        ),
+        SystemContextIndentation.aspectOf().getDepth()
       );
     }
   }

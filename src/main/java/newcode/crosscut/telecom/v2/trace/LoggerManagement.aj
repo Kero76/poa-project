@@ -8,6 +8,6 @@ public aspect LoggerManagement {
 		= Logger.getLogger(newcode.domain.telecom.v2.simulate.Simulation.class.getName());
 	
 	{
-		
+		Logger.getLogger(newcode.domain.telecom.v2.simulate.Simulation.class.getName()).setParent(null);
 	}
 }

@@ -1,11 +1,12 @@
 package newcode.crosscut.telecom.v2.trace;
 
 import newcode.crosscut.telecom.v2.common.Pointcuts;
-
+import newcode.crosscut.telecom.v2.trace.indent.SystemContextIndentation;
 import newcode.domain.telecom.v2.connect.*;
 import newcode.domain.telecom.v2.simulate.Simulation;
 
 import java.util.*;
+import java.util.logging.Level;
 
 public privileged aspect BillTracing {
   private Set<Customer> callers = new HashSet<>();
@@ -30,10 +31,12 @@ public privileged aspect BillTracing {
   after() : Pointcuts.executionSimulationRunTest() {
 	Simulation.logger.info(System.getProperty("line.separator"));
     for (Customer callee : callees) {
-      Simulation.logger.info(
+      newcode.crosscut.telecom.v2.trace.indent.IndentLogging.logger.log(
+        Level.INFO,
         FeatureMessages.billCompleteTracing(
           callee.getName(), callee.getAreaCode(), callee.getCallTotalDuration(), callee.getCallTotalPrice()
-        )
+        ),
+        SystemContextIndentation.aspectOf().getDepth()
       );
     }
     for (Customer caller : callers) {
@@ -41,19 +44,23 @@ public privileged aspect BillTracing {
       // Ici, l'interlocuteur est en attente d'un appel, dans le tracing affiche un etat de pending ... 
       if (callObj != null && !callObj.noCalleePending()) {
         for (ICustomer c : ((Call) callObj).pending.keySet()) {
-          Simulation.logger.info(
+          newcode.crosscut.telecom.v2.trace.indent.IndentLogging.logger.log(
+            Level.INFO,
             FeatureMessages.billPendingTracing(
               caller.getName(), caller.getAreaCode(), c.getName(), caller.getCallTotalPrice() // Manque le troisième élément, a savoir le nom de l'appelé.
-            )
+            ),
+            SystemContextIndentation.aspectOf().getDepth()
           );
         }
       }
       // ... sinon l'ensemble des appels est terminés, et le tracing affiche le message de billing complet.
       else {
-        Simulation.logger.info(
+        newcode.crosscut.telecom.v2.trace.indent.IndentLogging.logger.log(
+          Level.INFO,
           FeatureMessages.billCompleteTracing(
             caller.getName(), caller.getAreaCode(), caller.getCallTotalDuration(), caller.getCallTotalPrice()
-          )
+          ),
+          SystemContextIndentation.aspectOf().getDepth()
         );
       }
     }

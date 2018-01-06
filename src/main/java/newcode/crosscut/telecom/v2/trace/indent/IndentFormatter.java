@@ -6,7 +6,12 @@ import java.util.logging.LogRecord;
 public class IndentFormatter extends Formatter {
   public synchronized String format(LogRecord record) {
     StringBuffer sb = new StringBuffer();
-    int depth = ((Integer) record.getParameters()[0]);
+    int depth = 0;
+    if (record.getParameters() != null) {
+      depth = ((Integer) record.getParameters()[0]); 
+    } else {
+      depth = 0;
+    }
     sb.append(getIndent(depth));
     String message = formatMessage(record);
     sb.append(message);
@@ -18,7 +23,7 @@ public class IndentFormatter extends Formatter {
     if (n == 0) {
       return "";
     } else {
-      return "____" + getIndent(n - 1);
+      return "|  " + getIndent(n - 1);
     }
   }
 }
