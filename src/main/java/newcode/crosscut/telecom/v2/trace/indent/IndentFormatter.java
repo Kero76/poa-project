@@ -10,8 +10,8 @@ public class IndentFormatter extends Formatter {
   public synchronized String format(LogRecord record) {
     StringBuffer sb = new StringBuffer();
     int depth = 0;
-    if (record.getParameters() != null) {
-      depth = ((Integer) record.getParameters()[0]); 
+    if (record.getParameters() != null && (Integer) record.getParameters()[0] > 0) {
+      depth = ((Integer) record.getParameters()[0]) - 1; 
     } else {
       depth = 0;
     }
