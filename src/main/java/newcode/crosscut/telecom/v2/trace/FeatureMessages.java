@@ -1,5 +1,7 @@
 package newcode.crosscut.telecom.v2.trace;
 
+import newcode.crosscut.telecom.v2.trace.indent.IndentFormatter;
+
 public class FeatureMessages {
   
   /**
@@ -74,7 +76,7 @@ public class FeatureMessages {
   public static String timeConnectionNullToPendingTracing(String connection, String indent) {
     return String.format(
         "%s%s(null -> PENDING)", 
-        indent, connection
+        IndentFormatter.SEPARATOR, connection
     );
   }
   
@@ -92,7 +94,7 @@ public class FeatureMessages {
   public static String timeConnectionPendingToCompleteTracing(String connection, String indent) {
     return String.format(
         "%s%s(PENDING -> COMPLETE)", 
-        indent, connection
+        IndentFormatter.SEPARATOR, connection
     );
   }
   
@@ -112,10 +114,10 @@ public class FeatureMessages {
    * @return
    *  A beautiful string with all information to log on logger.
    */
-  public static String timeConnectionCompleteToDroppedAndLocalConnexionTracing(String connection, int seconds, double price, String indent) {
-    return String.format(
+  public static String timeConnectionCompleteToDroppedAndLocalConnexionTracing(String connection, int seconds, double price, int indent) {
+	  return String.format(
         "%s%s(COMPLETE -> DROPPED)\n%sTemps de connexion : %d \n%sMontant de la connexion locale : %.0f", 
-        indent, connection, indent, seconds, indent, price
+        IndentFormatter.SEPARATOR, connection, indentCreator(indent), seconds, indentCreator(indent), price
     );
   }
   
@@ -135,10 +137,10 @@ public class FeatureMessages {
    * @return
    *  A beautiful string with all information to log on logger.
    */
-  public static String timeConnectionCompleteToDroppedAndDistanteConnexionTracing(String connection, int seconds, double price, String indent) {
+  public static String timeConnectionCompleteToDroppedAndDistanteConnexionTracing(String connection, int seconds, double price, int indent) {
     return String.format(
         "%s%s(COMPLETE -> DROPPED)\n%sTemps de connexion : %d \n%sMontant de la connexion longue distance : %.0f", 
-        indent, connection, indent, seconds, indent, price
+        IndentFormatter.SEPARATOR, connection, indentCreator(indent), seconds, indentCreator(indent), price
     );
   }
   
@@ -158,5 +160,22 @@ public class FeatureMessages {
       sb.append(separatorChar);
     }
     return sb.toString();
+  }
+  
+  /**
+   * Create the right indentation representation for string.
+   * @param indent
+   * @return
+   * 
+   * @see timeConnectionCompleteToDroppedAndDistanteConnexionTracing()
+   * @see timeConnectionCompleteToDroppedAndLocalConnexionTracing()
+   */
+  private static String indentCreator(int indent) {
+	  StringBuilder str = new StringBuilder();
+	  for (int i = 0; i <= indent; ++i) {
+		  str.append(IndentFormatter.SEPARATOR);
+	  }
+	  
+	  return str.toString();
   }
 }

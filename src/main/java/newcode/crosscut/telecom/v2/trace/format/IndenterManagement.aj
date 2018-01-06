@@ -4,11 +4,6 @@ import newcode.crosscut.telecom.v2.common.Pointcuts;
 
 public aspect IndenterManagement {
 
-	/**
-	 * Formatter.
-	 */
-	private AbstractFormatter formatter = new SpaceFormatter();
-
 	pointcut stackTraceIndent() :
 		Pointcuts.customerFinalCallTrace()
 		|| Pointcuts.callFinalCallTrace()

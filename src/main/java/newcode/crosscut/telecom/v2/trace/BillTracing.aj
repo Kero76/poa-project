@@ -3,7 +3,6 @@ package newcode.crosscut.telecom.v2.trace;
 import newcode.crosscut.telecom.v2.common.Pointcuts;
 import newcode.crosscut.telecom.v2.trace.indent.SystemContextIndentation;
 import newcode.domain.telecom.v2.connect.*;
-import newcode.domain.telecom.v2.simulate.Simulation;
 
 import java.util.*;
 import java.util.logging.Level;
@@ -29,7 +28,7 @@ public privileged aspect BillTracing {
   }
   
   after() : Pointcuts.executionSimulationRunTest() {
-	Simulation.logger.info(System.getProperty("line.separator"));
+    System.out.println(System.getProperty("line.separator"));
     for (Customer callee : callees) {
       newcode.crosscut.telecom.v2.trace.indent.IndentLogging.logger.log(
         Level.INFO,
@@ -47,7 +46,7 @@ public privileged aspect BillTracing {
           newcode.crosscut.telecom.v2.trace.indent.IndentLogging.logger.log(
             Level.INFO,
             FeatureMessages.billPendingTracing(
-              caller.getName(), caller.getAreaCode(), c.getName(), caller.getCallTotalPrice() // Manque le troisième élément, a savoir le nom de l'appelé.
+              caller.getName(), caller.getAreaCode(), c.getName(), caller.getCallTotalPrice()
             ),
             SystemContextIndentation.aspectOf().getDepth()
           );
