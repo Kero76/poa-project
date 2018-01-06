@@ -117,7 +117,7 @@ public class FeatureMessages {
   public static String timeConnectionCompleteToDroppedAndLocalConnexionTracing(String connection, int seconds, double price, int indent) {
 	  return String.format(
         "%s%s(COMPLETE -> DROPPED)\n%sTemps de connexion : %d \n%sMontant de la connexion locale : %.0f", 
-        IndentFormatter.SEPARATOR, connection, indentCreator(indent), seconds, indentCreator(indent), price
+        IndentFormatter.SEPARATOR, connection, indentCreator(indent - 1), seconds, indentCreator(indent - 1), price
     );
   }
   
@@ -140,7 +140,7 @@ public class FeatureMessages {
   public static String timeConnectionCompleteToDroppedAndDistanteConnexionTracing(String connection, int seconds, double price, int indent) {
     return String.format(
         "%s%s(COMPLETE -> DROPPED)\n%sTemps de connexion : %d \n%sMontant de la connexion longue distance : %.0f", 
-        IndentFormatter.SEPARATOR, connection, indentCreator(indent), seconds, indentCreator(indent), price
+        IndentFormatter.SEPARATOR, connection, indentCreator(indent - 1), seconds, indentCreator(indent - 1), price
     );
   }
   

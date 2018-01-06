@@ -4,7 +4,6 @@ import java.util.logging.Level;
 
 import newcode.crosscut.telecom.v2.common.Pointcuts;
 import newcode.crosscut.telecom.v2.trace.format.AbstractFormatter;
-import newcode.crosscut.telecom.v2.trace.format.Counter;
 import newcode.crosscut.telecom.v2.trace.format.SpaceFormatter;
 import newcode.crosscut.telecom.v2.trace.indent.SystemContextIndentation;
 import newcode.domain.telecom.v2.connect.Customer;

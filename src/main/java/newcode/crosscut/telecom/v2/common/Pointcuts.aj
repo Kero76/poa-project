@@ -175,4 +175,10 @@ public privileged aspect Pointcuts {
   public pointcut callConstruction() :
     execution(newcode.domain.telecom.v2.connect.ICall+.new(..));
   ;
+  
+  // LINE RETURN
+  public pointcut stackTraceLineReturn() :
+    Pointcuts.customerCallTrace()
+    || Pointcuts.customerPickupCallTrace()
+  ;
 }
